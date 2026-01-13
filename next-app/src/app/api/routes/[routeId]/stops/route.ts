@@ -7,11 +7,12 @@ const HEADERS = {
 
 interface StopData {
   id: string;
+  code?: string;
   name: string;
   lat: number;
   lon: number;
-  cluster: string;
-  routes: Array<{ shortName: string }>;
+  cluster?: string;
+  routes?: Array<{ shortName: string }>;
 }
 
 export async function GET(
@@ -53,8 +54,9 @@ export async function GET(
         lat: stop.lat,
         lon: stop.lon,
         cluster: stop.code || stop.cluster || stop.id, // Use code as cluster ID
-      }));\n\n    console.log('[API] Sample mapped stop:', sortedStops[0]);
+      }));
 
+    console.log('[API] Sample mapped stop:', sortedStops[0]);
     console.log('[API] Filtered and sorted stops:', sortedStops.length);
     return NextResponse.json(sortedStops);
   } catch (error) {
