@@ -1,0 +1,16 @@
+{
+  "name": "grenoble-tram-tracker",
+  "version": "1.0.0",
+  "description": "Web app to display Grenoble transit line status",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "keywords": ["grenoble", "tram", "transit", "tracker"],
+  "author": "",
+  "license": "MIT"
+}

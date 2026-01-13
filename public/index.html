@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grenoble Tram C Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🚊 Grenoble Tram C Tracker</h1>
+        <p class="subtitle">Real-time arrivals for Tram Line C</p>
+        <div class="line-info">
+            <span class="line-badge tram-c">C</span>
+            <span class="line-name">SEYSSINS Le Prisme ↔ SAINT-MARTIN-D'HÈRES Université - Condillac</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="view-tabs">
+            <button id="tabAllStops" class="tab-btn active">🚊 All Stops</button>
+            <button id="tabDashboard" class="tab-btn">⭐ My Dashboard <span id="dashboardCount" class="badge">0</span></button>
+            <button id="btnFullscreen" class="tab-btn fullscreen-btn" title="Fullscreen Dashboard">⛶ Fullscreen</button>
+        </div>
+
+        <div class="controls">
+            <button id="refreshBtn" class="btn-refresh">
+                🔄 Refresh Data
+            </button>
+            <div class="last-update">
+                Last updated: <span id="lastUpdate">--</span>
+            </div>
+            <div class="direction-controls">
+                <label for="directionFilter">Direction:</label>
+                <select id="directionFilter">
+                    <option value="all">Both Directions</option>
+                    <option value="1">→ Condillac (Direction 1)</option>
+                    <option value="2">← Le Prisme (Direction 2)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="dashboardEmpty" class="dashboard-empty hidden">
+            <p>⭐ Your dashboard is empty</p>
+            <p class="hint">Click the star icon on any stop to add it to your dashboard</p>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading Tram C stops...</p>
+        </div>
+
+        <div id="error" class="error hidden">
+            <p>⚠️ Failed to load data. Please try again.</p>
+        </div>
+
+        <div id="stopsContainer" class="stops-container"></div>
+    </main>
+
+    <footer>
+        <p>Data source: <a href="https://data.mobilites-m.fr" target="_blank">Mobilités M - Grenoble</a></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
