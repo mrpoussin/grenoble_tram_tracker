@@ -2,20 +2,28 @@ import { useState, useEffect, useCallback } from 'react';
 import { Stop, ProcessedArrival, TrackPoint } from '@/lib/types';
 
 export function useTramData(routeId: string) {
+  console.log('[useTramData] Hook called with routeId:', routeId);
+  
   const [stops, setStops] = useState<Stop[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchStops() {
+      console.log('[useTramData] Fetching stops for route:', routeId);
       try {
         setLoading(true);
-        const res = await fetch(`/api/routes/${encodeURIComponent(routeId)}/stops`);
-        if (!res.ok) throw new Error('Failed to fetch stops');
+        const url = `/api/routes/${encodeURIComponent(routeId)}/stops`;
+        console.log('[useTramData] Fetching URL:', url);
+        const res = await fetch(url);
+        console.log('[useTramData] Response status:', res.status);
+        if (!res.ok) throw new Error(`Failed to fetch stops: ${res.status}`);
         const data = await res.json();
+        console.log('[useTramData] Received stops:', data.length, data);
         setStops(data);
         setError(null);
       } catch (err) {
+        console.error('[useTramData] Error fetching stops:', err);
         setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
         setLoading(false);

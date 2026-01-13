@@ -24,11 +24,15 @@ const FullscreenDashboard = dynamic(() => import('@/components/FullscreenDashboa
 const ROUTE_ID = 'SEM:C';
 
 export default function TramTracker() {
+  console.log('[TramTracker] Component rendering');
+  
   const [activeTab, setActiveTab] = useState<'all' | 'favorites'>('all');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [stopArrivals, setStopArrivals] = useState<Map<string, StopArrivals>>(new Map());
 
   const { stops, loading, error, fetchStoptimes } = useTramData(ROUTE_ID);
+  
+  console.log('[TramTracker] State:', { stopsCount: stops.length, loading, error });
   const { favorites, toggleFavorite } = useFavorites();
   const trackShape = useTrackShape();
 
